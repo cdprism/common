@@ -8,6 +8,8 @@ import org.shancm.common.enums.ResponseCodeEnum;
 import org.shancm.common.exception.ResponseException;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -36,6 +38,22 @@ public class CommonResponse<T> implements Serializable {
     public static <T> CommonResponse<T> success(T data){
         CommonResponse<T> response = CommonResponse.success();
         response.setData(data);
+        return response;
+    }
+
+    /**
+     * 返回键值对
+     *
+     * @param name 属性名
+     * @param data 数据
+     * @param <T> 泛型
+     * @return 键值对数据
+     */
+    public static <T> CommonResponse<Map<String, T>> success(String name, T data){
+        CommonResponse<Map<String, T>> response = CommonResponse.success();
+        Map<String, T> map = new HashMap<>(4);
+        map.put(name, data);
+        response.setData(map);
         return response;
     }
 
